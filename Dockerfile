@@ -1,0 +1,19 @@
+FROM alpine:latest
+
+COPY base/ /
+
+RUN apk add --no-cache runit spamassassin tzdata gnupg && \
+    find /etc/service/ -type f -name run -exec chmod 754 {} \; && \
+    find /etc/periodic/ -type f -exec chmod 774 {} \; && \
+    chmod 700 /init.sh
+
+EXPOSE 783
+
+VOLUME  /var/lib/spamassassin
+
+ENV DNS_CHECKS=0
+
+HEALTHCHECK --interval=1m --start-period=15s --timeout=1s \
+    CMD netstat -ltn | grep -c 783
+
+CMD ["/init.sh"]

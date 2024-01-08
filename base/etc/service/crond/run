@@ -1,0 +1,7 @@
+#!/bin/sh -e
+exec 2>&1
+
+# Remove stale pid
+rm -f /var/run/crond.pid
+
+exec crond -f -l 15 -c /etc/crontabs

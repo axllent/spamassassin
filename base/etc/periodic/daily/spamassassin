@@ -1,0 +1,2 @@
+#!/bin/sh
+sa-update && kill -HUP $(cat /var/run/spamd.pid)
