@@ -13,7 +13,7 @@ VOLUME  /var/lib/spamassassin
 
 ENV DNS_CHECKS=0
 
-HEALTHCHECK --interval=1m --start-period=15s --timeout=1s \
+HEALTHCHECK --interval=5s --start-period=15s --timeout=1s \
     CMD netstat -ltn | grep -c 783
 
 CMD ["/init.sh"]
