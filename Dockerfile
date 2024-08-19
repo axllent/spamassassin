@@ -2,7 +2,7 @@ FROM alpine:latest
 
 COPY base/ /
 
-RUN apk add --no-cache runit spamassassin tzdata gnupg && \
+RUN apk add --no-cache runit spamassassin tzdata gnupg perl-socket6 && \
     find /etc/service/ -type f -name run -exec chmod 754 {} \; && \
     find /etc/periodic/ -type f -exec chmod 774 {} \; && \
     chmod 700 /init.sh

@@ -19,8 +19,8 @@ sa-update && echo "Updated SpamAssassin rules" || echo "SpamAssassin rules up-to
 
 if [ "$DNS_CHECKS" = "true" ] || [ "$DNS_CHECKS" = "1" ]; then
     rm -f /etc/mail/spamassassin/rdns.cf
-    exec spamd --ip-address --allowed-ips 0.0.0.0/0 -u nobody -g nogroup --syslog stderr --nouser-config --pidfile /var/run/spamd.pid
+    exec spamd --ip-address --allowed-ips 0.0.0.0/0 --allowed-ips [::]/0 -u nobody -g nogroup --syslog stderr --nouser-config --pidfile /var/run/spamd.pid
 else
     echo "score RDNS_NONE 0" >/etc/mail/spamassassin/rdns.cf
-    exec spamd --local --ip-address --allowed-ips 0.0.0.0/0 -u nobody -g nogroup --syslog stderr --nouser-config --pidfile /var/run/spamd.pid
+    exec spamd --local --ip-address --allowed-ips 0.0.0.0/0 --allowed-ips [::]/0 -u nobody -g nogroup --syslog stderr --nouser-config --pidfile /var/run/spamd.pid
 fi
