@@ -12,6 +12,8 @@ EXPOSE 783
 VOLUME  /var/lib/spamassassin
 
 ENV DNS_CHECKS=0
+ENV INTERNAL_NETWORKS=""
+ENV TRUSTED_NETWORKS=""
 
 HEALTHCHECK --interval=5s --start-period=15s --timeout=1s \
     CMD netstat -ltn | grep -c 783

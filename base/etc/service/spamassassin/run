@@ -17,6 +17,20 @@ echo
 
 sa-update && echo "Updated SpamAssassin rules" || echo "SpamAssassin rules up-to-date"
 
+if [ "$TRUSTED_NETWORKS" != "" ]; then
+    echo "Applying TRUSTED_NETWORKS"
+    echo "trusted_networks $TRUSTED_NETWORKS" >/etc/mail/spamassassin/trusted_networks.cf
+else
+    rm -f /etc/mail/spamassassin/trusted_networks.cf
+fi
+
+if [ "$INTERNAL_NETWORKS" != "" ]; then
+    echo "Applying INTERNAL_NETWORKS"
+    echo "internal_networks $INTERNAL_NETWORKS" >>/etc/mail/spamassassin/internal_networks.cf
+else
+    rm -f /etc/mail/spamassassin/internal_networks.cf
+fi
+
 if [ "$DNS_CHECKS" = "true" ] || [ "$DNS_CHECKS" = "1" ]; then
     rm -f /etc/mail/spamassassin/rdns.cf
     exec spamd --ip-address --allowed-ips 0.0.0.0/0 --allowed-ips [::]/0 -u nobody -g nogroup --syslog stderr --nouser-config --pidfile /var/run/spamd.pid
