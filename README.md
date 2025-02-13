@@ -1,6 +1,6 @@
 # SpamAssassin
 
-A SpamAssassin [docker container](https://hub.docker.com/r/axllent/spamassassin)
+A SpamAssassin v4 [docker container](https://hub.docker.com/r/axllent/spamassassin)
 running on Alpine Linux.
 
 This image is designed to listen on port 783 for third-party integration, and is not a full-featured
