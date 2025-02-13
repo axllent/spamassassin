@@ -4,10 +4,10 @@
 
 sv_stop() {
     for s in $(ls -d /etc/service/*); do
-        /sbin/sv stop $s
+        sv stop $s
     done
 }
 
 trap "sv_stop; exit" SIGTERM
-/sbin/runsvdir -P /etc/service &
+runsvdir -P /etc/service &
 wait
